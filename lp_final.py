@@ -106,4 +106,5 @@ while True:
         main_loop(button_counter)
         button_counter+=1
     time.sleep(0.2)
-
+    if counter == len(image_new_list):
+        counter = 0
