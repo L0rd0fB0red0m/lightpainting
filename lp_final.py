@@ -2,12 +2,13 @@ from neopixel import *
 import time
 import ast
 import RPi.GPIO as GPIO
-import convert
 import random
 import os, fnmatch
+
 #Button-config:
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(25, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
 # LED strip configuration:
 LED_COUNT      = 144      # Number of LED pixels.
 LED_PIN        = 18      # GPIO pin connected to the pixels (18 uses PWM!).
@@ -20,8 +21,27 @@ LED_STRIP      = ws.WS2811_STRIP_GRB   # Strip type and colour ordering
 strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL, LED_STRIP)
 strip.begin()
 
-    
 
+def convert_image(image_path,image_path_new):
+    with open(image_path,"r") as f:
+        with open(image_path_new,"w") as k:
+            #file1=f.readlines()
+            #len_file = len(file1)-4
+            len_file=191*3
+            k.write(f.readline())
+            k.write(f.readline())
+            dims=f.readline()
+            k.write(dims)
+            file_len=int(dims[:dims.index(" ")])*int(dims[dims.index(" "):])
+            k.write(f.readline())
+            for i in range(int(file_len)):
+                pixel = f.readline()[0:-1] + " " + f.readline()[0:-1] + " " + f.readline()
+                k.write(pixel)
+                
+        k.close()
+    f.close()
+    
+    
 def show_picture(image_path_new):
     image_width=read_image(image_path_new)
     with open("transition.txt","r") as f:
@@ -36,9 +56,9 @@ def show_picture(image_path_new):
             #print(i)
 
 
-#def clear_strip():
-    #for i in range(144):
-    #strip.setPixelColorRGB(i,0,0,0)
+def clear_strip():
+    for i in range(144):
+        strip.setPixelColorRGB(i,0,0,0)
 
 
 def read_image(image_path_new):
@@ -80,7 +100,7 @@ def read_image(image_path_new):
 
 
 def main_loop(counterNOW):
-    convert.convert_image("images/"+image_old_list[counterNOW],"images/new/"+image_new_list[counterNOW])
+    convert_image("images/"+image_old_list[counterNOW],"images/new/"+image_new_list[counterNOW])
     show_picture("images/new/"+image_new_list[counterNOW])
 
 
