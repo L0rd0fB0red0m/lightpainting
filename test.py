@@ -35,42 +35,42 @@ def convert_image(image_path):
         for i in range(int(file_len)):
             pixel = f.readline()[0:-1] + " " + f.readline()[0:-1] + " " + f.readline()
             new_image.append(pixel)   
-    f.close()
+        f.close()
 	return new_image
     
 
 def read_image(image_path,number_of_image):
-	converted_image = convert_image(image_path) 	#will be a list with 1 LE / 1ine
-	converted_image = converted_image[2:]			#removes first 2 comment lines
-	image_dims = converted_image[0]
-	converted_image = converted_image[1:]
-	image_width=int(image_dims[0:image_dims.index(" ")])
-	converted_image = converted_image[1:]
+    converted_image = convert_image(image_path) 	#will be a list with 1 LE / 1ine
+    converted_image = converted_image[2:]			#removes first 2 comment lines
+    image_dims = converted_image[0]
+    converted_image = converted_image[1:]
+    image_width=int(image_dims[0:image_dims.index(" ")])
+    converted_image = converted_image[1:]
     columns=[]
     for i in range(image_width):
         for j in range(144):#height of image (should be 144)
             line = converted_image[0]
-			converted_image = converted_image[1:]
-			if i==0:
-				columns.append([])
-			columns[j].append(line)
+	    converted_image = converted_image[1:]
+	    if i==0:
+	        columns.append([])
+	        columns[j].append(line)
 	final_columns=[]
 
 	for i in range(len(columns)):
-		final_columns.append([])
-		for j in range(len(columns[i])):
-			final_columns[i].append([])
-			columns[i][j]=columns[i][j][:-1]
-			for k in range(2):
-				final_columns[i][j].append(int(columns[i][j][:columns[i][j].index(" ")]))
-				columns[i][j]=columns[i][j][columns[i][j].index(" ")+1:]
-				#print(columns)
-			final_columns[i][j].append(int(columns[i][j]))
+	    final_columns.append([])
+	    for j in range(len(columns[i])):
+	        final_columns[i].append([])
+	        columns[i][j]=columns[i][j][:-1]
+	        for k in range(2):
+                    final_columns[i][j].append(int(columns[i][j][:columns[i][j].index(" ")]))
+                    columns[i][j]=columns[i][j][columns[i][j].index(" ")+1:]
+                    #print(columns)
+                    final_columns[i][j].append(int(columns[i][j]))
 
 	with open("/images/new_format/transition"+number_of_image+".txt","w") as f:
-		for i in final_columns:
-			for j in i:
-				f.write(str(j)+"\n")
+                for i in final_columns:
+                    for j in i:
+                        f.write(str(j)+"\n")
 	f.close()
 	final_columns=[]
 	width_of_each_image.append(image_width)
