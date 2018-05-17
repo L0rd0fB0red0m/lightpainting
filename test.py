@@ -106,20 +106,20 @@ intermed_counter = 0
 
 #show program start (not ready):
 for _ in range(10):
-	strip.setPixelColorRGB(_,200,0,0)
+     strip.setPixelColorRGB(_,200,0,0)
 	
 list_all = os.listdir('images')
 pattern = "*.ppm"
 for entry in list_all:  
     if fnmatch.fnmatch(entry, pattern):
-            image_old_list.append(entry)
+         image_old_list.append(entry)
 for _ in image_old_list:
     read_image(_,intermed_counter)
-	intermed_counter+=1
+    intermed_counter+=1
 
 #show that ready:
 for _ in range(10):
-	strip.setPixelColorRGB(_,0,200,0)
+    strip.setPixelColorRGB(_,0,200,0)
 	
 
 while True:
