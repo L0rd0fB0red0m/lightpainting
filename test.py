@@ -114,7 +114,7 @@ for entry in list_all:
     if fnmatch.fnmatch(entry, pattern):
          image_old_list.append(entry)
 for _ in image_old_list:
-    read_image(_,intermed_counter)
+    read_image("/images/"+_,intermed_counter)
     intermed_counter+=1
 
 #show that ready:
