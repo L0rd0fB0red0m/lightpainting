@@ -49,16 +49,18 @@ def read_image(image_path,number_of_image):
         #inverted_list.append([])
         for j in range(144):
             #height of image (should be 144)
-            inverted_list[i][j] = converted_image[i*j]                          #i, then j or j then i?
+            inverted_list[j][i] = converted_image[i*j]                          #i, then j or j then i?
+            if i<30:
+            	print(i,j,i*j)
     print(inverted_list[100][100])
 
-    for _ in range(len(inverted_list)):
-        for __ in range(len(inverted_list[_])):
+    for _ in range(len(inverted_list)):			#columns
+        for __ in range(len(inverted_list[_])):		#lines
             string = inverted_list[_][__]
-            print(string)
+            #print(string)
             pixel_list = [int(s) for s in string.split() if s.isdigit()]
-            #print(pixel_list)
-            inverted_list[_][__]= ""
+            print(_,__,pixel_list)
+            inverted_list[_][__]= pixel_list
     print(inverted_list[100][100])
     """final_columns=[]
     for i in range(len(columns)):
@@ -71,25 +73,33 @@ def read_image(image_path,number_of_image):
                 columns[i][j]=columns[i][j][columns[i][j].index(" ")+1:]
                 #print(columns)
                 final_columns[i][j].append(int(columns[i][j]))"""
-    with open("/images/new_format/transition"+number_of_image+".json","w") as f:
-                json.dump(final_columns)
+    with open("images/new_format/transition"+str(number_of_image)+".json","w") as f:
+                json.dump(inverted_list,f)
     f.close()
     final_columns=[]
     width_of_each_image.append(image_width)
-    image_as_txt_list.append("/images/new_format/transition"+number_of_image+".txt")
+    image_as_txt_list.append("images/new_format/transition"+str(number_of_image)+".txt")
 
-
+"""
 def show_picture(txt_path,image_width):
     with open(txt_path,"r") as f:
         for i in range(image_width):
             for j in range(144):
                 pixel_now=f.readline()
                 pixel_now=ast.literal_eval(pixel_now)
-                print(i,j,pixel_now[0],pixel_now[1],pixel_now[2])
-                #strip.setPixelColorRGB(j,pixel_now[0],pixel_now[1],pixel_now[2])
+"""
+                
+#Better way!!
+def show_picture(json_path,image_width):
+	with open(json_path,"r") as f:
+		pixels = json.load(f)#oder anders?
+		for _ in range(len(pixels)):
+			for __ in range(len(pixels[_])):
+				pixel_temp = pixels[_][__]
+				print(pixel_temp[0],pixel_temp[1],pixel_temp[2])
+                #strip.setPixelColorRGB(__,pixel_temp[0],pixel_temp[1],pixel_temp[2])
             #strip.show()
-            time.sleep(0.08)
-            #print(i)
+            #time.sleep(0.08)
 
 """
 def clear_strip():
