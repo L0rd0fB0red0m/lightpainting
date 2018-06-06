@@ -31,75 +31,47 @@ def convert_image(image_path):
         file_len=int(dims[:dims.index(" ")])*int(dims[dims.index(" "):])
         new_image.append(f.readline())
         for i in range(int(file_len)):
-            pixel = f.readline()[0:-1] + " " + f.readline()[0:-1] + " " + f.readline()
+            p1 = int(f.readline()[:-1])
+            p2= int(f.readline()[:-1])
+            p3= int(f.readline()[:-1])
+            pixel = [p1,p2,p3]
             new_image.append(pixel)
+            print(pixel)
         f.close()
     return new_image
 
 
 def read_image(image_path,number_of_image):
-    converted_image = convert_image(image_path) 	#will be a list with 1 LE / 1ine
-    converted_image = converted_image[2:]			#removes first 2 comment lines
+    converted_image = convert_image(image_path) 	                            #will be a list with 1 LE / 1ine
+    converted_image = converted_image[2:]			                            #removes first 2 comment lines
     image_dims = converted_image[0]
     converted_image = converted_image[1:]
     image_width=int(image_dims[0:image_dims.index(" ")])
     converted_image = converted_image[1:]
-    inverted_list=image_width*[144*[""]]
+    inverted_list = image_width*[]
+    list_iteration_counter = 0
     for i in range(image_width):
-        #inverted_list.append([])
-        for j in range(144):
-            #height of image (should be 144)
-            inverted_list[j][i] = converted_image[i*j]                          #i, then j or j then i?
-            if i<30:
-            	print(i,j,i*j)
-    print(inverted_list[100][100])
-
-    for _ in range(len(inverted_list)):			#columns
-        for __ in range(len(inverted_list[_])):		#lines
-            string = inverted_list[_][__]
-            #print(string)
-            pixel_list = [int(s) for s in string.split() if s.isdigit()]
-            print(_,__,pixel_list)
-            inverted_list[_][__]= pixel_list
-    print(inverted_list[100][100])
-    """final_columns=[]
-    for i in range(len(columns)):
-        final_columns.append([])
-        for j in range(len(columns[i])):
-            final_columns[i].append([])
-            columns[i][j]=columns[i][j][:-1]
-            for k in range(2):
-                final_columns[i][j].append(int(columns[i][j][:columns[i][j].index(" ")]))
-                columns[i][j]=columns[i][j][columns[i][j].index(" ")+1:]
-                #print(columns)
-                final_columns[i][j].append(int(columns[i][j]))"""
+        for j in range(144):                                                    #height of image (should be 144)
+            inverted_list[j].append(converted_image[list_iteration_counter])
+            list_iteration_counter+=1
     with open("images/new_format/transition"+str(number_of_image)+".json","w") as f:
                 json.dump(inverted_list,f)
     f.close()
     final_columns=[]
     width_of_each_image.append(image_width)
-    image_as_txt_list.append("images/new_format/transition"+str(number_of_image)+".txt")
+    image_as_json_list.append("images/new_format/transition"+str(number_of_image)+".json")
 
-"""
-def show_picture(txt_path,image_width):
-    with open(txt_path,"r") as f:
-        for i in range(image_width):
-            for j in range(144):
-                pixel_now=f.readline()
-                pixel_now=ast.literal_eval(pixel_now)
-"""
-                
-#Better way!!
 def show_picture(json_path,image_width):
 	with open(json_path,"r") as f:
-		pixels = json.load(f)#oder anders?
-		for _ in range(len(pixels)):
-			for __ in range(len(pixels[_])):
-				pixel_temp = pixels[_][__]
-				print(pixel_temp[0],pixel_temp[1],pixel_temp[2])
-                #strip.setPixelColorRGB(__,pixel_temp[0],pixel_temp[1],pixel_temp[2])
-            #strip.show()
-            #time.sleep(0.08)
+		pixels = json.load(f)
+        f.close()
+	for _ in range(len(pixels)):
+		for __ in range(len(pixels[_])):
+			pixel_temp = pixels[_][__]
+			#print(pixel_temp[0],pixel_temp[1],pixel_temp[2])
+            #strip.setPixelColorRGB(__,pixel_temp[0],pixel_temp[1],pixel_temp[2])
+        #strip.show()
+        #time.sleep(0.08)
 
 """
 def clear_strip():
@@ -107,10 +79,10 @@ def clear_strip():
         strip.setPixelColorRGB(i,0,0,0)
 """
 
-
+################################################################################
 #Init. vars:
 image_old_list = []
-image_as_txt_list = []
+image_as_json_list = []
 width_of_each_image = []
 button_counter=0
 intermed_counter = 0
@@ -140,9 +112,10 @@ while True:
     input_state = GPIO.input(25)
     if input_state == False:
         print("Button pressed")
-        show_picture(image_as_txt_list[button_counter],width_of_each_image[button_counter])
+        show_picture(image_as_json_list[button_counter],width_of_each_image[button_counter])
         button_counter+=1
     time.sleep(0.2)
     if counter == len(image_new_list):
         counter = 0
 """
+show_picture(image_as_json_list[0],width_of_each_image[0])
