@@ -47,15 +47,15 @@ def read_image(image_path,number_of_image):
 	converted_image = converted_image[1:]
 	image_width=int(image_dims[0:image_dims.index(" ")])
 	converted_image = converted_image[1:]
-	inverted_list = image_width*[144*[""]]
+	inverted_list = [[] for i in range(image_width)]
 	print(inverted_list[0][0])
 	list_iteration_counter = 0
 	print(inverted_list[0][0])
-	for i in range(image_width):
+	for i in range(144):
 		print(inverted_list[0][0])
-		for j in range(144):
+		for j in range(image_width):
 			print(inverted_list[143][143])												#height of image (should be 144)
-			inverted_list[i][j] = converted_image[list_iteration_counter]
+			inverted_list[j][i] = converted_image[list_iteration_counter] # alternative mit .append(): inverted_list[j].append(converted_image[list_iteration_counter}])
 			list_iteration_counter+=1
 	with open("images/new_format/transition"+str(number_of_image)+".json","w") as f:
 		json.dump(inverted_list,f)
