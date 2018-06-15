@@ -46,11 +46,10 @@ def read_image(image_path,number_of_image):
 	converted_image = converted_image[1:]
 	inverted_list = [[] for i in range(image_width)]
 	list_iteration_counter = 0
-	inverted_list[0].append(converted_image[list_iteration_counter])
 
-	for i in range(image_width):
-		for j in range(144):
-			inverted_list[0].append(converted_image[list_iteration_counter])
+	for i in range(144):
+		for j in range(image_width):
+			inverted_list[j].append(converted_image[list_iteration_counter])
 			list_iteration_counter+=1
 	with open("images/new_format/transition"+str(number_of_image)+".json","w") as f:
 		json.dump(inverted_list,f)
@@ -77,6 +76,7 @@ def show_picture(json_path,image_width):
 def clear_strip():
 	for i in range(144):
 		strip.setPixelColorRGB(i,0,0,0)
+	strip.show()
 
 
 ################################################################################
@@ -91,6 +91,7 @@ intermed_counter = 0
 #show program start (not ready):
 for _ in range(10):
 	 strip.setPixelColorRGB(_,200,0,0)
+strip.show()
 
 
 list_all = os.listdir('images')
@@ -106,6 +107,7 @@ for _ in image_old_list:
 #show that ready:
 for _ in range(10):
 	strip.setPixelColorRGB(_,0,200,0)
+strip.show()
 
 
 while True:
@@ -116,5 +118,5 @@ while True:
 		button_counter+=1
 	clear_strip()
 	time.sleep(0.2)
-	if counter == len(image_new_list):
-		counter = 0
+	if button_counter == len(image_as_json_list):
+		button_counter = 0
