@@ -103,11 +103,12 @@ for _ in image_old_list:
 	read_image("images/"+_,intermed_counter)
 	intermed_counter+=1
 
-
+clear_strip()
 #show that ready:
 for _ in range(10):
 	strip.setPixelColorRGB(_,0,200,0)
 strip.show()
+time.sleep(2)
 
 
 while True:
