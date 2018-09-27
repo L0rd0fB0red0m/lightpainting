@@ -1,4 +1,4 @@
-#from neopixel import *
+from neopixel import *
 import time
 import RPi.GPIO as GPIO
 
