@@ -68,7 +68,7 @@ def show_picture(json_path,image_width):
 		for __ in range(len(pixels[_])):
 			pixel_temp = pixels[_][__]
 			print(pixel_temp[0],pixel_temp[1],pixel_temp[2])
-			strip.setPixelColorRGB(__,pixel_temp[0],pixel_temp[1],pixel_temp[2])
+			strip.setPixelColorRGB(LED_COUNT-1-__,pixel_temp[0],pixel_temp[1],pixel_temp[2])
 		strip.show()
 		time.sleep(0.08)
 
