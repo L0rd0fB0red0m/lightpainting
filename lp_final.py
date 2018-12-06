@@ -116,17 +116,15 @@ while True:
 	if input_state == False:
 		start_time = time.time()
 		print(start_time)
-		while True:
+		while delta_t:
 			print(time.time())
 			input_state = GPIO.input(25)
 			if input_state == False:
 				button_counter+=2
-				break
+				delta_t = False
 
 			if time.time() - start_time >= 0.5:
-				show_picture(image_as_json_list[button_counter],width_of_each_image[button_counter])
-				button_counter+=1
-				break
+				delta_t = False
 		print("Button pressed")
 		print(button_counter)
 	clear_strip()
