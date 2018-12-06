@@ -115,7 +115,9 @@ while True:
 	input_state = GPIO.input(25)
 	if input_state == False:
 		start_time = time.time()
+		print(start_time)
 		while True:
+			print(time.time())
 			input_state = GPIO.input(25)
 			if input_state == False:
 				button_counter+=2
