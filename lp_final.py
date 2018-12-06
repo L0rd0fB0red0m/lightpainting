@@ -24,7 +24,6 @@ strip.begin()
 def convert_image(image_path):
 	with open(image_path,"r") as f:
 		new_image = []
-		print(f.readline())
 		f.readline()
 		dims=f.readline()
 		file_len=int(dims[:dims.index(" ")])*int(dims[dims.index(" "):])
@@ -116,6 +115,7 @@ while True:
 	if input_state == False:
 		start_time = time.time()
 		while True:
+			input_state = GPIO.input(25)
 			if input_state == False:
 				button_counter+=2
 				break
