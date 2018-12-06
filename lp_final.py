@@ -122,11 +122,11 @@ while True:
 				break
 
 			if time.time() - start_time >= 0.5:
+				show_picture(image_as_json_list[button_counter],width_of_each_image[button_counter])
 				button_counter+=1
 				break
 		print("Button pressed")
-		show_picture(image_as_json_list[button_counter],width_of_each_image[button_counter])
-		print(image_as_json_list[button_counter])
+		print(button_counter)
 	clear_strip()
 	time.sleep(0.2)
 	if button_counter == len(image_as_json_list):
