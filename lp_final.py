@@ -25,6 +25,7 @@ def convert_image(image_path):
 	with open(image_path,"r") as f:
 		new_image = []
 		f.readline()
+		f.readline()
 		dims=f.readline()
 		file_len=int(dims[:dims.index(" ")])*int(dims[dims.index(" "):])
 		new_image.append(int(dims[:dims.index(" ")]))
