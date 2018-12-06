@@ -116,6 +116,7 @@ while True:
 	if input_state == False:
 		start_time = time.time()
 		print(start_time)
+		time.sleep(1)
 		delta_t = True
 		while delta_t:
 			print(time.time())
