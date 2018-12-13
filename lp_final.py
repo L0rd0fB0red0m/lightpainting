@@ -114,9 +114,9 @@ time.sleep(2)
 while True:
 	input_state = GPIO.input(25)
 	if input_state == False:
+		time.sleep(0.1)
 		start_time = time.time()
 		print(start_time)
-		time.sleep(0.1)
 		delta_t = True
 		while delta_t:
 			print(time.time())
@@ -124,7 +124,7 @@ while True:
 			if input_state == False:
 				delta_t = False
 
-			if time.time() - start_time >= 0.6:
+			if time.time() - start_time >= 0.5:
 				show_picture(image_as_json_list[button_counter],width_of_each_image[button_counter])
 				delta_t = False
 				
