@@ -116,6 +116,7 @@ while True:
 	if input_state == False:
 		start_time = time.time()
 		print(start_time)
+		time.sleep(0.1)
 		delta_t = True
 		while delta_t:
 			print(time.time())
@@ -123,7 +124,7 @@ while True:
 			if input_state == False:
 				delta_t = False
 
-			if time.time() - start_time >= 0.5:
+			if time.time() - start_time >= 0.6:
 				show_picture(image_as_json_list[button_counter],width_of_each_image[button_counter])
 				delta_t = False
 				
