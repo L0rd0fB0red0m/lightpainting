@@ -60,7 +60,6 @@ def read_image(image_path,number_of_image):
 
 
 def show_picture(json_path,image_width):
-	print(json_path,image_width)
 	with open(json_path,"r") as f:
 		pixels = json.load(f)
 		f.close()
@@ -122,14 +121,14 @@ while True:
 			input_state = GPIO.input(25)
 			if input_state == False:
 				delta_t = False
+				print("Button pressed twice")
 
 			if time.time() - start_time >= 0.5:
 				show_picture(image_as_json_list[button_counter],width_of_each_image[button_counter])
 				delta_t = False
 				
 		button_counter += 1
-		print("Button pressed")
-		print(button_counter)
+		print(list_all[button_counter])
 	clear_strip()
 	time.sleep(0.2)
 	if button_counter == len(image_as_json_list):
