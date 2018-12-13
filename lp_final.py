@@ -111,9 +111,10 @@ time.sleep(2)
 
 
 while True:
+	print(list_all[button_counter+1])
 	input_state = GPIO.input(25)
 	if input_state == False:
-		time.sleep(0.1)
+		time.sleep(0.3)
 		start_time = time.time()
 		print(start_time)
 		delta_t = True
@@ -127,8 +128,7 @@ while True:
 				show_picture(image_as_json_list[button_counter],width_of_each_image[button_counter])
 				delta_t = False
 				
-		button_counter += 1
-		print(list_all[button_counter])
+		button_counter+=1
 	clear_strip()
 	time.sleep(0.2)
 	if button_counter == len(image_as_json_list):
