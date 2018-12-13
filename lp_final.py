@@ -83,7 +83,8 @@ def clear_strip():
 image_old_list = []
 image_as_json_list = []
 width_of_each_image = []
-button_counter=0
+button_counter = 0
+while_counter = 0
 intermed_counter = 0
 
 
@@ -111,10 +112,12 @@ time.sleep(2)
 
 
 while True:
-	print(list_all[button_counter+1] + " is next on the list.")
+	if while_counter = 0:
+		print(list_all[button_counter+1] + " is next on the list.")
 	input_state = GPIO.input(25)
 	if input_state == False:
 		time.sleep(0.3)
+		while_counter = 0
 		start_time = time.time()
 		print(start_time)
 		delta_t = True
@@ -131,5 +134,6 @@ while True:
 		button_counter+=1
 	clear_strip()
 	time.sleep(0.2)
+	while_counter += 1
 	if button_counter == len(image_as_json_list):
 		button_counter = 0
