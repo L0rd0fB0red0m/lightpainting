@@ -119,7 +119,6 @@ while True:
 		print(start_time)
 		delta_t = True
 		while delta_t:
-			print(time.time())
 			input_state = GPIO.input(25)
 			if input_state == False:
 				delta_t = False
