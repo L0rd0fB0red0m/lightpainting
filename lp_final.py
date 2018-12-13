@@ -120,7 +120,7 @@ while True:
 		time.sleep(0.3)
 		while_counter = 0
 		start_time = time.time()
-		print(start_time)
+		print("PRESS NOW! GOGOGOGO")
 		delta_t = True
 		while delta_t:
 			input_state = GPIO.input(25)
@@ -129,6 +129,7 @@ while True:
 				print("Button pressed twice")
 
 			if time.time() - start_time >= 0.5:
+				print("Too slow noob...")
 				show_picture(image_as_json_list[button_counter],width_of_each_image[button_counter])
 				delta_t = False
 				
