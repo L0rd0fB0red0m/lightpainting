@@ -113,7 +113,7 @@ time.sleep(2)
 
 while True:
 	if while_counter == 0:
-		print(list_all[button_counter+1] + " is next on the list.")
+		print(list_all[button_counter] + " is next on the list.")
 	while_counter += 1
 	input_state = GPIO.input(25)
 	if input_state == False:
