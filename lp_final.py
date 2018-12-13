@@ -114,6 +114,7 @@ time.sleep(2)
 while True:
 	if while_counter == 0:
 		print(list_all[button_counter+1] + " is next on the list.")
+	while_counter += 1
 	input_state = GPIO.input(25)
 	if input_state == False:
 		time.sleep(0.3)
@@ -134,6 +135,5 @@ while True:
 		button_counter+=1
 	clear_strip()
 	time.sleep(0.2)
-	while_counter += 1
 	if button_counter == len(image_as_json_list):
 		button_counter = 0
