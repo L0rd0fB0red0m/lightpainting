@@ -3,6 +3,7 @@ import time
 import json
 import RPi.GPIO as GPIO
 import os, fnmatch
+import numpy as np
 
 #Button-config:
 GPIO.setmode(GPIO.BCM)
@@ -81,7 +82,7 @@ def clear_strip():
 ################################################################################
 #Init. vars:
 image_old_list = []
-image_as_json_list = []
+image_as_json_list, image_already_parsed = []
 width_of_each_image = []
 button_counter = 0
 while_counter = 0
@@ -95,13 +96,22 @@ strip.show()
 
 
 list_all = os.listdir('images')
+list_already_parsed = os.listdir('images/new_format')
 pattern = "*.ppm"
+
 for entry in list_all:
 	if fnmatch.fnmatch(entry, pattern):
 		 image_old_list.append(entry)
-for _ in image_old_list:
-	read_image("images/"+_,intermed_counter)
-	intermed_counter+=1
+         
+pattern = "*.json"
+for entry in list_already_parsed:
+	if fnmatch.fnmatch(entry, pattern):
+		 image_already_parsed.append(entry)
+         
+for old_img in image_old_list:
+    if (old_img[:index(".ppm")] + ".json") not in image_already_parsed:
+        read_image("images/"+_,intermed_counter)
+        intermed_counter+=1
 
 clear_strip()
 #show that ready:
