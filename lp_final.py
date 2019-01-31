@@ -57,7 +57,7 @@ def read_image(image_path):
 		f.close()
 	del inverted_list
 	width_of_each_image.append(image_width)
-	image_as_json_list.append("images/new_format/"+image_path[image_path.rfind("/"):image_path.index(".ppm")+".json")
+	image_as_json_list.append("images/new_format/"+image_path[image_path.rfind("/"):image_path.index(".ppm")]+".json")
 
 
 def show_picture(json_path):
