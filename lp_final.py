@@ -122,7 +122,7 @@ for _ in range(10):
 strip.show()
 time.sleep(2)
 
-
+print(image_as_json_list)
 while True:
 	if while_counter == 0:
 		print(list_all[button_counter] + " is next on the list.")
@@ -135,6 +135,7 @@ while True:
 		print("PRESS NOW! GOGOGOGO")
 		delta_t = True
 		while delta_t:
+			print(button_counter)
 			input_state = GPIO.input(25)
 			if input_state == False:
 				delta_t = False
