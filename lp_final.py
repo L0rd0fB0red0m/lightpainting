@@ -82,7 +82,8 @@ def clear_strip():
 ################################################################################
 #Init. vars:
 image_old_list = []
-image_as_json_list, image_already_parsed = []
+image_as_json_list
+image_already_parsed = []
 width_of_each_image = []
 button_counter = 0
 while_counter = 0
