@@ -64,7 +64,7 @@ def show_picture(json_path):
 	with open(json_path,"r") as f:
 		image_dict = json.load(f)
 		f.close()
-    pixel = image_dict["pixel"]
+	pixel = image_dict["pixel"]
 	for _ in range(len(pixel)):
 		for __ in range(len(pixel[_])):
 			pixel_temp = pixel[_][__]
