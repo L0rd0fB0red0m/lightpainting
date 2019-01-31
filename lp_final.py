@@ -110,7 +110,7 @@ for entry in list_already_parsed:
 		 image_already_parsed.append(entry)
          
 for old_img in image_old_list:
-    print(read_image("images/"+old_img,intermed_counter)
+    print(read_image("images/"+old_img,intermed_counter))
     if (old_img[:old_img.index(".ppm")] + ".json") not in image_already_parsed:
         read_image("images/"+old_img,intermed_counter)
         intermed_counter+=1
