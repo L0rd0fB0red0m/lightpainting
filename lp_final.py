@@ -99,7 +99,7 @@ strip.show()
 list_all = os.listdir('images')
 list_already_parsed = os.listdir('images/new_format')
 pattern = "*.ppm"
-
+print(list_all,list_already_parsed)
 for entry in list_all:
 	if fnmatch.fnmatch(entry, pattern):
 		 image_old_list.append(entry)
@@ -110,6 +110,7 @@ for entry in list_already_parsed:
 		 image_already_parsed.append(entry)
          
 for old_img in image_old_list:
+    print(read_image("images/"+old_img,intermed_counter)
     if (old_img[:old_img.index(".ppm")] + ".json") not in image_already_parsed:
         read_image("images/"+old_img,intermed_counter)
         intermed_counter+=1
