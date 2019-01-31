@@ -108,7 +108,7 @@ for entry in list_already_parsed:
 	if fnmatch.fnmatch(entry, pattern):
 		 image_already_parsed.append(entry)
          
-for old_img in image_old_list:
+for index, old_img in enumerate(image_old_list):
     if (old_img[:index(".ppm")] + ".json") not in image_already_parsed:
         read_image("images/"+_,intermed_counter)
         intermed_counter+=1
