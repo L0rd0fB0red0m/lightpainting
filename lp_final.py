@@ -41,7 +41,7 @@ def convert_image(image_path):
 	return new_image
 
 
-def read_image(image_path,number_of_image):
+def read_image(image_path):
 	converted_image = convert_image(image_path) 								#will be a list with 1 LE / 1ine
 	image_width = converted_image[0]
 	converted_image = converted_image[1:]
@@ -57,7 +57,7 @@ def read_image(image_path,number_of_image):
 		f.close()
 	del inverted_list
 	width_of_each_image.append(image_width)
-	image_as_json_list.append("images/new_format/transition"+str(number_of_image)+".json")
+	image_as_json_list.append("images/new_format/"+image_path[image_path.rfind("/"):image_path.index(".ppm")+".json")
 
 
 def show_picture(json_path,image_width):
@@ -87,7 +87,6 @@ image_already_parsed = []
 width_of_each_image = []
 button_counter = 0
 while_counter = 0
-intermed_counter = 0
 
 
 #show program start (not ready):
@@ -112,8 +111,7 @@ for entry in list_already_parsed:
 for old_img in image_old_list:
     print(old_img[:old_img.index(".ppm")] + ".json")
     if (old_img[:old_img.index(".ppm")] + ".json") not in image_already_parsed:
-        read_image("images/"+old_img,intermed_counter)
-        intermed_counter+=1
+        read_image("images/"+old_img)
     else:
 	image_as_json_list = image_already_parsed
 
