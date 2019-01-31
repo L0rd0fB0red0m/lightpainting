@@ -53,20 +53,21 @@ def read_image(image_path):
 			inverted_list[j].append(converted_image[list_iteration_counter])
 			list_iteration_counter+=1
 	with open("images/new_format/"+image_path[image_path.rfind("/"):image_path.index(".ppm")]+".json","w") as f:
-		json.dump(inverted_list,f)
+		json.dump({"pixel":inverted_list,"dims_width":image_width},f)
 		f.close()
 	del inverted_list
 	width_of_each_image.append(image_width)
 	image_as_json_list.append("images/new_format/"+image_path[image_path.rfind("/"):image_path.index(".ppm")+".json")
 
 
-def show_picture(json_path,image_width):
+def show_picture(json_path):
 	with open(json_path,"r") as f:
-		pixels = json.load(f)
+		image_dict = json.load(f)
 		f.close()
-	for _ in range(len(pixels)):
-		for __ in range(len(pixels[_])):
-			pixel_temp = pixels[_][__]
+    pixel = image_dict["pixel"]
+	for _ in range(len(pixel)):
+		for __ in range(len(pixel[_])):
+			pixel_temp = pixel[_][__]
 			#print(pixel_temp[0],pixel_temp[1],pixel_temp[2])
 			strip.setPixelColorRGB(LED_COUNT-1-__,pixel_temp[0],pixel_temp[1],pixel_temp[2])
 		strip.show()
@@ -143,7 +144,7 @@ while True:
 
 			if time.time() - start_time >= 0.5:
 				print("Too slow noob...")
-				show_picture(image_as_json_list[button_counter],width_of_each_image[button_counter])
+				show_picture(image_as_json_list[button_counter])
 				delta_t = False
 				
 		button_counter+=1
