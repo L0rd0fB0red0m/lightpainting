@@ -114,6 +114,8 @@ for old_img in image_old_list:
     if (old_img[:old_img.index(".ppm")] + ".json") not in image_already_parsed:
         read_image("images/"+old_img,intermed_counter)
         intermed_counter+=1
+    else:
+	image_as_json_list = image_already_parsed
 
 clear_strip()
 #show that ready:
