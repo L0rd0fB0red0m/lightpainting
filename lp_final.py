@@ -52,7 +52,7 @@ def read_image(image_path,number_of_image):
 		for j in range(image_width):
 			inverted_list[j].append(converted_image[list_iteration_counter])
 			list_iteration_counter+=1
-	with open(image_path["images/new_format/"+image_path.rfind("/"):image_path.index(".ppm")]+".json","w") as f:
+	with open("images/new_format/"+image_path[image_path.rfind("/"):image_path.index(".ppm")]+".json","w") as f:
 		json.dump(inverted_list,f)
 		f.close()
 	del inverted_list
