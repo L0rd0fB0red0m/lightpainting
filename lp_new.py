@@ -43,14 +43,14 @@ class Image_Handler():
         # Shows that you're ready to go:
         for p in range(144):
             strip.setPixelColorRGB(p,0,200,0)
-
         strip.show()
+
         time.sleep(2)
 
 
     def read_image(self, image_unparsed_path):
 
-        reconstructed_image = reconstruct_image(image_unparsed_path)
+        reconstructed_image = self.reconstruct_image(image_unparsed_path)
         # Recover image width
         image_width = reconstructed_image[0]
         # Remove image width from list
@@ -81,7 +81,7 @@ class Image_Handler():
 
 
     # Reconstructs and stores the image's pixels in a list
-    def recontruct_image(self, image_unparsed_path):
+    def reconstruct_image(self, image_unparsed_path):
         with open(image_unparsed_path,"r") as f:
             reconstructed_image = []
             # Skip title and file type
@@ -121,9 +121,11 @@ class Image_Handler():
             for h in range(len(pixels[w])): # len(pixel[w]) immer 144 oder?
                 temp_pixel = pixels[w][h]
                 # Allocate each column's pixel to the strip
+                """IF WISHING DO DEBUG  ON NON-RPI SYSTEMS"""
+                #print(LED_COUNT-1-h,temp_pixel[0],temp_pixel[1],temp_pixel[2])
                 strip.setPixelColorRGB(LED_COUNT-1-h,temp_pixel[0],temp_pixel[1],temp_pixel[2])
             # Show after the column has been completely filled
-            strip.show()
+            ##strip.show()
             # As it is pretty perilous running around with an LED strip and since the results are not that good either, reduce the display frequency
             time.sleep(0.08)
 
@@ -143,7 +145,9 @@ if __name__ == "__main__":
     GPIO.setup(25, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
     # LED strip configuration:
+
     LED_COUNT	   = 144	    # Number of LED pixels
+
     LED_PIN		   = 18	        # GPIO pin connected to the strip (18 uses PWM!)
     LED_FREQ_HZ	   = 800000     # LED signal frequency in hertz (usually 800khz)
     LED_DMA		   = 5	        # DMA channel to use for generating signal (try 5)
@@ -175,6 +179,8 @@ if __name__ == "__main__":
     	first_iteration = False
         # Check button's input state
     	input_state = GPIO.input(25)
+        #input_state = bool(input("TEST")) """DEBUGGING"""
+
         # If button clicked
     	if input_state == False:
             # Delay to let some scope for an eventual second button press
@@ -191,6 +197,7 @@ if __name__ == "__main__":
 
                 # If the image is clicked, skip the actual image
     			input_state = GPIO.input(25)
+                #input_state = bool(input("TEST")) """DEBUGGING""")
 
     			if input_state == False:
     				delta_t = False
@@ -199,16 +206,21 @@ if __name__ == "__main__":
                 # Computes the actual time each while-loop-iteration and compares it to the precedently stored time
     			if time.time() - start_time >= 0.5:
     				print(perfect_image_handler.list_images_parsed[button_counter] + " is being displayed now.")
-    				perfect_image_handler.display_picture(perfect_image_handler.list_images_parsed[button_counter])
+    				perfect_image_handler.display_picture("images/new_format/"+perfect_image_handler.list_images_parsed[button_counter])
     				delta_t = False
 
             # Independently from your decision, jump to the subsequent image
     		button_counter += 1
 
+            #Better tha last if statement:
+            button_counter = button_counter%len(perfect_image_handler.list_images_parsed)
+
         # Clear the srip after an image has been completely displayed
     	perfect_image_handler.clear_strip()
     	time.sleep(0.2)
 
+        """
         # Reset button_counter if it has reached the last image stored in perfect_image_handler.list_images_parsed
     	if button_counter == len(perfect_image_handler.list_images_parsed):
     		button_counter = 0
+        """
