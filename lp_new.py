@@ -125,7 +125,7 @@ class Image_Handler():
                 #print(LED_COUNT-1-h,temp_pixel[0],temp_pixel[1],temp_pixel[2])
                 strip.setPixelColorRGB(LED_COUNT-1-h,temp_pixel[0],temp_pixel[1],temp_pixel[2])
             # Show after the column has been completely filled
-            ##strip.show()
+            strip.show()
             # As it is pretty perilous running around with an LED strip and since the results are not that good either, reduce the display frequency
             time.sleep(0.08)
 
