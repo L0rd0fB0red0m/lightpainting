@@ -184,40 +184,40 @@ if __name__ == "__main__":
         # If button clicked
     	if input_state == False:
             # Delay to let some scope for an eventual second button press
-    		time.sleep(0.3)
+            time.sleep(0.3)
             # As an image will be displayed, the message shall tell us which one comes next
-    		first_iteration = True
+            first_iteration = True
             # Store time in order to work with time intervals
-    		start_time = time.time()
+            start_time = time.time()
             # Visual help for the user
-    		print("Press now to skip to the next image")
-    		delta_t = True
+            print("Press now to skip to the next image")
+            delta_t = True
             # While loop loops until the button is either clicked or left unpressed for 0.5s
-    		while delta_t:
+            while delta_t:
 
                 # If the image is clicked, skip the actual image
-    			input_state = GPIO.input(25)
+                input_state = GPIO.input(25)
                 #input_state = bool(input("TEST")) """DEBUGGING""")
 
-    			if input_state == False:
-    				delta_t = False
-    				print("Button pressed twice")
+                if input_state == False:
+                    delta_t = False
+                    print("Button pressed twice")
 
                 # Computes the actual time each while-loop-iteration and compares it to the precedently stored time
-    			if time.time() - start_time >= 0.5:
-    				print(perfect_image_handler.list_images_parsed[button_counter] + " is being displayed now.")
-    				perfect_image_handler.display_picture("images/new_format/"+perfect_image_handler.list_images_parsed[button_counter])
-    				delta_t = False
+                if time.time() - start_time >= 0.5:
+                    print(perfect_image_handler.list_images_parsed[button_counter] + " is being displayed now.")
+                    perfect_image_handler.display_picture("images/new_format/"+perfect_image_handler.list_images_parsed[button_counter])
+                    delta_t = False
 
             # Independently from your decision, jump to the subsequent image
-    		button_counter += 1
+            button_counter += 1
 
             #Better tha last if statement:
             button_counter = button_counter%len(perfect_image_handler.list_images_parsed)
 
-        # Clear the srip after an image has been completely displayed
-    	perfect_image_handler.clear_strip()
-    	time.sleep(0.2)
+        # Clear the srip after an image has been completely dis
+        perfect_image_handler.clear_strip()
+        time.sleep(0.2)
 
         """
         # Reset button_counter if it has reached the last image stored in perfect_image_handler.list_images_parsed
