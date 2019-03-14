@@ -77,7 +77,7 @@ class Image_Handler():
         # Delete list?
         #del inverted_list
         # Add file to list
-        self.list_images_parsed.append("images/new_format/" + image_unparsed_path[image_unparsed_path.rfind("/"):image_unparsed_path.index(".ppm")] + ".json")
+        self.list_images_parsed.append("images/new_format/" + image_unparsed_path[image_unparsed_path.rfind("/")+1:image_unparsed_path.index(".ppm")] + ".json")
 
 
     # Reconstructs and stores the image's pixels in a list
